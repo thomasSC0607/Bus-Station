@@ -18,25 +18,29 @@ class Bus:
                 self.pasajeros.append(f'pasajero {i}')
             estacion.no_pasajeros = pasajerosPorFuera
 
-    def definir_ruta(self, bus):
-        ciudad_inicio = madrid
-        while bus.capacidad <= self.capacidad:
-            self.recoger_pasajeros(ciudad_inicio)
+    def definir_ruta(self, bus, ciudad, ciudad_inicio):
+        c_inicio = ciudad_inicio
+        while len(bus.pasajeros) <= self.capacidad:
+            if len(bus.pasajeros) == self.capacidad:
+                break
+            self.recoger_pasajeros(c_inicio)
             destinos = []
             for ruta in ciudad.rutas:
-                if ruta.estacion_inicio == ciudad_inicio:
+                if ruta.estacion_inicio == c_inicio:
                     destinos.append(ruta.estacion_destino)
-                menor = self.capacidad
-                for destino in destinos:
-                    if destino.noPasajeros < menor:
-                        menor = destino.noPasajeros
-                for a in destinos:
-                    if a.noPasajeros == menor:
-                        ciudad_destino = a
-            ciudad_inicio = ciudad_destino
+            menor = self.capacidad
+            for destino in destinos:
+                if destino.no_pasajeros < menor:
+                    menor = destino.no_pasajeros
+            for a in destinos:
+                if a.no_pasajeros == menor:
+                    ciudad_destino = a
+            self.definir_ruta(bus, ciudad, ciudad_destino)
+        print("Devolviendose porque la capacidad esta al maximo")
+        return
 
 
 if __name__ == "__main__":
     bus = Bus()
-    bus.definir_ruta(bus)
+    bus.definir_ruta(bus, madrid)
 
