@@ -1,8 +1,9 @@
 class Estacion:
-    def __init__(self, id, nombre, pasajeros):
+    def __init__(self, id, nombre, no_pasajeros):
         self.id = id
         self.nombre = nombre
-        self.pasajeros = pasajeros
+        self.no_pasajeros = no_pasajeros
+        self.pasajeros_llegada = []  # El unico que implementa este atributo es la estacion Guadalajara
 
 
 class Ruta:
