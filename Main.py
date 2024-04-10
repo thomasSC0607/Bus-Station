@@ -6,7 +6,7 @@ if __name__ == "__main__":
     ciudad = Ciudad()
 
     madrid = Estacion('M', 'Madrid', 23)
-    toledo = Estacion('T', 'Toledo', 9)
+    toledo = Estacion('T', 'Toledo', 15)
     segovia = Estacion('S', 'Segovia', 5)
     guadalajara = Estacion('G', 'Guadalajara', 14)
     avila = Estacion('A', 'Avila', 10)

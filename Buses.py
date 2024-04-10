@@ -8,15 +8,21 @@ class Bus:
 
     def recoger_pasajeros(self, estacion):
         if len(self.pasajeros) + estacion.no_pasajeros <= self.capacidad:
+            count = 0
             for i in range(estacion.no_pasajeros):
                 self.pasajeros.append(f'pasajero {i}')
+                count += 1
             estacion.no_pasajeros = 0
+            print(f"Pasajeros recogido en {estacion.nombre}: {count}")
         else:
             pasajerosPorFuera = abs((len(self.pasajeros) + estacion.no_pasajeros) - self.capacidad)
             pasajerosParaBordar = abs(pasajerosPorFuera - estacion.no_pasajeros)
+            count = 0
             for i in range(pasajerosParaBordar):
                 self.pasajeros.append(f'pasajero {i}')
+                count += 1
             estacion.no_pasajeros = pasajerosPorFuera
+            print(f"Pasajeros recogido en {estacion.nombre}: {count}")
 
     def definir_ruta(self, bus, ciudad, estacion_inicio):
         c_inicio = estacion_inicio
@@ -53,7 +59,17 @@ class Bus:
             arreglo_estaciones.append(ciudad.estaciones[key])
         self.bubble_sort(arreglo_estaciones)
 
-        print(f"{arreglo_estaciones}")
+        for est in arreglo_estaciones:
+            print(f"{est.nombre}, numero pasajeros: {est.no_pasajeros}")
+
+        for ruta in ciudad.rutas:
+            if ruta.estacion_inicio == c_inicio and ruta.estacion_destino == arreglo_estaciones[0]:
+                self.recoger_pasajeros(arreglo_estaciones[0])
+                c_inicio = arreglo_estaciones[0]
+                arreglo_estaciones.pop(0)
+                print(f"Capacidad del bus: {bus.pasajeros}")
+            else:
+                print(f"No se")
 
     def bubble_sort(self, array):
         n = len(array)
