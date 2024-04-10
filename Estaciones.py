@@ -114,6 +114,5 @@ if __name__ == "__main__":
 
     ciudad.mostar_ciudad()
 
-    # Encuentra todas las rutas desde Madrid ('M') a Toledo ('T')
-    ciudad.encontrar_todas_las_rutas('M', 'G')
+
 

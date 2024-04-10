@@ -16,14 +16,14 @@ if __name__ == "__main__":
     ciudad.add_estacion(avila)
 
     ciudad.add_ruta(madrid, toledo, 72.5)
-    ciudad.add_ruta(madrid, guadalajara, 66.6)
     ciudad.add_ruta(madrid, segovia, 91.6)
-    ciudad.add_ruta(avila, guadalajara, 171)
-    ciudad.add_ruta(avila, madrid, 95)
-    ciudad.add_ruta(avila, toledo, 160)
+    ciudad.add_ruta(toledo, segovia, 159)
     ciudad.add_ruta(segovia, avila, 64.3)
     ciudad.add_ruta(segovia, guadalajara, 153)
-    ciudad.add_ruta(segovia, toledo, 159)
-    ciudad.add_ruta(toledo, segovia, 159)
+    ciudad.add_ruta(avila, guadalajara, 171)
+    ciudad.add_ruta(madrid, guadalajara, 66.6)
 
     ciudad.mostar_ciudad()
+
+    # Encuentra todas las rutas desde Madrid ('M') a Toledo ('T')
+    ciudad.encontrar_todas_las_rutas('M', 'G')
