@@ -62,6 +62,8 @@ class Bus:
         for est in arreglo_estaciones:
             print(f"{est.nombre}, numero pasajeros: {est.no_pasajeros}")
 
+        self.encontrar_camino(ciudad, c_inicio, arreglo_estaciones)
+        """
         for ruta in ciudad.rutas:
             if ruta.estacion_inicio == c_inicio and ruta.estacion_destino == arreglo_estaciones[0]:
                 self.recoger_pasajeros(arreglo_estaciones[0])
@@ -70,6 +72,7 @@ class Bus:
                 print(f"Capacidad del bus: {bus.pasajeros}")
             else:
                 print(f"No se")
+        """
 
     def bubble_sort(self, array):
         n = len(array)
@@ -100,10 +103,9 @@ class Bus:
         print(f"\npasajeros en la estacion de llegada:")
         print(ciudad.estaciones['G'].pasajeros_llegada)
 
-    def encontrar_camino(self, inicio, arr_rutas, camino_actual=None):
+    def encontrar_camino(self, ciudad, inicio, arr_rutas, camino_actual=None):
         if camino_actual is None:
             camino_actual = []  # lista
-        inicio = self.estaciones.get(inicio)
         destino = arr_rutas[0]
         if inicio is None or destino is None:
             print("\nADVERTENCIA: Nodo de inicio o destino no encontrado en el grafo.")
@@ -112,9 +114,9 @@ class Bus:
         if inicio == destino:
             self.recoger_pasajeros(inicio)
             arr_rutas.pop(0)
-            self.encontrar_camino(destino, camino_actual[:], )
+            self.encontrar_camino(ciudad, destino, camino_actual[:])
             self.mostrar_camino(camino_actual)
             return
-        for ruta in self.rutas:
+        for ruta in ciudad.rutas:
             if ruta.estacion_inicio == inicio and ruta.estacion_destino not in camino_actual:
-                self.encontrar_camino(ruta.estacion_destino, destino, camino_actual[:])
+                self.encontrar_camino(ciudad, ruta.estacion_destino, destino)

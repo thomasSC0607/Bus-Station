@@ -58,8 +58,6 @@ class Ciudad:
         for ruta in self.rutas:
             print(f"{ruta}")
 
-
-
     def mostrar_camino(self, camino):
         if camino:
             print("\nCAMINO ENCONTRADO:")
