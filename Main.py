@@ -2,6 +2,7 @@ from Buses import *
 from Estaciones import *
 
 if __name__ == "__main__":
+
     ciudad = Ciudad()
 
     madrid = Estacion('M', 'Madrid', 23)
