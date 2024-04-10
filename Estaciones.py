@@ -58,7 +58,7 @@ class Ciudad:
         for ruta in self.rutas:
             print(f"{ruta}")
 
-    def mostrar_camino(self, camino):
+    def mostrar_camino(self, camino): #camino siendo e, arreglo de nodos
         if camino:
             print("\nCAMINO ENCONTRADO:")
             costo_total = 0
@@ -68,6 +68,11 @@ class Ciudad:
                 costo_total += arista.peso
             print(f"Costo total del camino: [{costo_total} Km]\n")
             print('-'*20)
+
+    def buscar_ruta(self, inicio_id, destino_id):
+        for ruta in self.rutas:
+            if ruta.estacion_inicio.id == inicio_id and ruta.estacion_destino.id == destino_id:
+                return ruta
 
 
 if __name__ == "__main__":
