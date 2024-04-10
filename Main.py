@@ -4,11 +4,11 @@ from Estaciones import *
 if __name__ == "__main__":
     ciudad = Ciudad()
 
-    madrid = Estacion('M', 'Madrid', 8)
+    madrid = Estacion('M', 'Madrid', 23)
     toledo = Estacion('T', 'Toledo', 9)
-    segovia = Estacion('S', 'Segovia', 10)
-    guadalajara = Estacion('G', 'Guadalajara', 11)
-    avila = Estacion('A', 'Avila', 12)
+    segovia = Estacion('S', 'Segovia', 5)
+    guadalajara = Estacion('G', 'Guadalajara', 14)
+    avila = Estacion('A', 'Avila', 10)
 
     ciudad.add_estacion(madrid)
     ciudad.add_estacion(toledo)
@@ -30,5 +30,5 @@ if __name__ == "__main__":
     ciudad.mostar_ciudad()
 
     bus = Bus()
-    bus.definir_ruta(bus, ciudad, madrid)
-
+    # bus.definir_ruta(bus, ciudad, madrid)
+    bus.definir_ruta2(bus, ciudad, madrid)
