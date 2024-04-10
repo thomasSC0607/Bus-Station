@@ -58,21 +58,7 @@ class Ciudad:
         for ruta in self.rutas:
             print(f"{ruta}")
 
-    def encontrar_camino(self, inicio_id, destino_id, camino_actual=None):
-        if camino_actual is None:
-            camino_actual = []  # lista
-        inicio = self.nodos.get(inicio_id)
-        destino = self.nodos.get(destino_id)
-        if inicio is None or destino is None:
-            print("\nADVERTENCIA: Nodo de inicio o destino no encontrado en el grafo.")
-            return
-        camino_actual = camino_actual + [inicio]
-        if inicio == destino:
-            self.mostrar_camino(camino_actual)
-            return
-        for arista in self.aristas:
-            if arista.nodo_inicio == inicio and arista.nodo_destino not in camino_actual:
-                self.encontrar_camino(arista.nodo_destino.id, destino_id, camino_actual[:])
+
 
     def mostrar_camino(self, camino):
         if camino:

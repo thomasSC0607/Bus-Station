@@ -100,18 +100,21 @@ class Bus:
         print(f"\npasajeros en la estacion de llegada:")
         print(ciudad.estaciones['G'].pasajeros_llegada)
 
-    def encontrar_camino(self, inicio_id, destino_id, camino_actual=None):
+    def encontrar_camino(self, inicio, arr_rutas, camino_actual=None):
         if camino_actual is None:
             camino_actual = []  # lista
-        inicio = self.nodos.get(inicio_id)
-        destino = self.nodos.get(destino_id)
+        inicio = self.estaciones.get(inicio)
+        destino = arr_rutas[0]
         if inicio is None or destino is None:
             print("\nADVERTENCIA: Nodo de inicio o destino no encontrado en el grafo.")
             return
         camino_actual = camino_actual + [inicio]
         if inicio == destino:
+            self.recoger_pasajeros(inicio)
+            arr_rutas.pop(0)
+            self.encontrar_camino(destino, camino_actual[:], )
             self.mostrar_camino(camino_actual)
             return
-        for arista in self.aristas:
-            if arista.nodo_inicio == inicio and arista.nodo_destino not in camino_actual:
-                self.encontrar_camino(arista.nodo_destino.id, destino_id, camino_actual[:])
+        for ruta in self.rutas:
+            if ruta.estacion_inicio == inicio and ruta.estacion_destino not in camino_actual:
+                self.encontrar_camino(ruta.estacion_destino, destino, camino_actual[:])
