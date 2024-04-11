@@ -18,9 +18,9 @@ if __name__ == "__main__":
         ciudad.add_estacion(guadalajara)
         ciudad.add_estacion(avila)
 
+        ciudad.add_ruta(madrid, segovia, 91.6)
         ciudad.add_ruta(madrid, toledo, 72.5)
         ciudad.add_ruta(madrid, guadalajara, 66.6)
-        ciudad.add_ruta(madrid, segovia, 91.6)
         ciudad.add_ruta(avila, guadalajara, 171)
         ciudad.add_ruta(avila, madrid, 95)
         ciudad.add_ruta(avila, toledo, 160)

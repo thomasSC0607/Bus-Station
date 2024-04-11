@@ -53,21 +53,6 @@ class Ciudad:
                 if random.random() <= 0.3: # 30% de probabilidad de agregar pasajeros ya que el random genera de 0 a 1
                     estacion.no_pasajeros += 1
                     total_pasajeros_agregados += 1
-    def agregar_pasajeros_manualmente(self):
-        numero_total = 20 # int(input("Ingrese la cantidad de pasajeros inicial entre todas las estaciones\n"))
-        keys = []
-        estaciones_array = []
-        for i in self.estaciones:
-            keys.append(i)
-        for key in keys:
-            estaciones_array.append(self.estaciones[key])
-
-        for est in estaciones_array:
-            if numero_total > 1:
-                est.no_pasajeros += random.randint(1, numero_total)
-            else:
-                estaciones_array[-1].no_pasajeros = numero_total
-            numero_total = numero_total - est.no_pasajeros
 
     def add_ruta(self, estacion_inicio, estacion_destino, distancia):
         if estacion_inicio.id in self.estaciones and estacion_destino.id in self.estaciones:
@@ -91,21 +76,6 @@ class Ciudad:
                     self.encontrar_todas_las_rutas(ruta.estacion_destino.id, destino_id, ruta_actual[:], #aqui se pasa como ciudad inicio una de las rutasa del nodo actual
                                                    distancia_total + ruta.distancia)
 
-    def encontrar_camino2(self, inicio_id, destino_id, camino_actual=None):
-        if camino_actual is None:
-            camino_actual = []  # lista
-        inicio = self.estaciones.get(inicio_id)
-        destino = self.estaciones.get(destino_id)
-        if inicio is None or destino is None:
-            print("\nADVERTENCIA: Nodo de inicio o destino no encontrado en el grafo.")
-            return
-        camino_actual = camino_actual + [inicio]
-        if inicio == destino:
-            self.mostrar_camino(camino_actual)
-            return
-        for ruta in self.rutas:
-            if ruta.estacion_inicio == inicio and ruta.estacion_destino not in camino_actual:
-                self.encontrar_camino2(ruta.estacion_destino.id, destino_id, camino_actual[:])
     def mostrar_ruta(self, ruta, distancia_total):
         if ruta:
             print("\nRUTA ENCONTRADA:")
@@ -117,17 +87,6 @@ class Ciudad:
     def mostar_ciudad(self):
         for ruta in self.rutas:
             print(f"{ruta}")
-
-    def mostrar_camino(self, camino): #camino siendo e, arreglo de nodos
-        if camino:
-            print("\nCAMINO ENCONTRADO:")
-            costo_total = 0
-            for i in range(len(camino) - 1):
-                arista = self.buscar_arista(camino[i].id, camino[i + 1].id)
-                print(f"{arista.nodo_inicio.nombre} -> {arista.nodo_destino.nombre} (Peso: {arista.peso})")
-                costo_total += arista.peso
-            print(f"Costo total del camino: [{costo_total} Km]\n")
-            print('-'*20)
 
     def buscar_ruta(self, inicio_id, destino_id):
         for ruta in self.rutas:
