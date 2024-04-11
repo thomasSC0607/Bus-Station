@@ -45,8 +45,16 @@ if __name__ == "__main__":
             ciudad.encontrar_todas_las_rutas('M', 'G')
             menu()
         elif opcion == 2:
-            ciudad.agregar_pasajeros_manualmente()
+            p = int(input("Ingrese la cantidad de pasajeros a distribuir en la ciudad: \n"))
+            ciudad.distribuir_pasajeros(p)
+            print("Pasajeros distribuidos en la ciudad\n")
+            bus.pasajeros_restantes(ciudad, bus)
+
             bus.definir_ruta2(bus, ciudad, madrid)
+            """bus1 = Bus()
+            bus1.definir_ruta2(bus, ciudad, madrid)
+
+            ciudad.agregar_pasajerosRan30(ciudad)"""
         elif opcion == 3:
             print("Gracias por usar Bus Station")
 

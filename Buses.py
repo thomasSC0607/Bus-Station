@@ -13,7 +13,7 @@ class Bus:
                 self.pasajeros.append(f'pasajero {i}')
                 count += 1
             estacion.no_pasajeros = 0
-            print(f"Bus llego a {estacion.nombre}")
+            print(f"\nBus llego a {estacion.nombre}")
             print(f"Pasajeros recogido en {estacion.nombre}: {count}")
         else:
             pasajerosPorFuera = abs((len(self.pasajeros) + estacion.no_pasajeros) - self.capacidad)
@@ -62,23 +62,27 @@ class Bus:
         self.bubble_sort(arreglo_estaciones)
 
         for est in arreglo_estaciones:
-            if len(self.pasajeros) == self.capacidad:
-                ciudad.estaciones['G'].pasajeros_llegada += bus.pasajeros
-                print("\nDevolviendose porque la capacidad esta al maximo")
-                print("\nPasajeros Restantes:")
-                self.pasajeros_restantes(ciudad, bus)
-                print("\nPasajeros que llegaron a Guadalajara:")
-                print(f"{ciudad.estaciones['G'].pasajeros_llegada}")
             if est.no_pasajeros != 0:
                 self.recoger_pasajeros(est)
 
         if len(self.pasajeros) == self.capacidad:
-            ciudad.estaciones['G'].pasajeros_llegada += bus.pasajeros
-            print("\nDevolviendose porque la capacidad esta al maximo")
-            print("\nPasajeros Restantes:")
+            ciudad.estaciones['G'].pasajeros_llegada.append(bus.pasajeros)
+            print("\nDevolviendose rumbo a guadalajara ya que la capacidad del bus esta al maximo")
+            print("\nPasajeros Restantes en la ciudad:\n")
             self.pasajeros_restantes(ciudad, bus)
-            print("\nPasajeros que llegaron a Guadalajara:")
-            print(f"{ciudad.estaciones['G'].pasajeros_llegada}")
+            print(f"\nPasajeros que llegaron a Guadalajara: {len(ciudad.estaciones['G'].pasajeros_llegada)}\n")
+            print(f"{ciudad.estaciones['G'].pasajeros_llegada}\n")
+            bus.pasajeros = []
+            if ciudad.total_pasajeros() < 0:
+                ciudad.agregar_pasajerosRan30(ciudad)
+            self.definir_ruta2(bus, ciudad, estacion_inicio)
+        elif ciudad.total_pasajeros() == 0:
+            ciudad.estaciones['G'].pasajeros_llegada.append(bus.pasajeros)
+            print("\nPasajeros Restantes en la ciudad:\n")
+            self.pasajeros_restantes(ciudad, bus)
+            print(f"\nPasajeros que llegaron a Guadalajara: {len(ciudad.estaciones['G'].pasajeros_llegada)}\n")
+            print(f"{ciudad.estaciones['G'].pasajeros_llegada}\n")
+            print("\nRuta finalizada")
         # print(f"{est.nombre}, numero pasajeros: {est.no_pasajeros}")
 
     def encontrar_camino(self, ciudad, inicio, arr_rutas):
@@ -119,6 +123,5 @@ class Bus:
             if key != 'G':
                 print(f"{ciudad.estaciones[key].nombre} --> {ciudad.estaciones[key].no_pasajeros}")
         ciudad.estaciones['G'].pasajeros_llegada = bus.pasajeros
-        print(f"\npasajeros en la estacion de llegada:")
-        print(ciudad.estaciones['G'].pasajeros_llegada)
+
 
