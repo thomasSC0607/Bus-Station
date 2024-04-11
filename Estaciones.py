@@ -1,8 +1,11 @@
+import random
+
+
 class Estacion:
-    def __init__(self, id, nombre, no_pasajeros):
+    def __init__(self, id, nombre):
         self.id = id
         self.nombre = nombre
-        self.no_pasajeros = no_pasajeros
+        self.no_pasajeros = 0
         self.pasajeros_llegada = []  # El unico que implementa este atributo es la estacion Guadalajara
 
 
@@ -23,6 +26,22 @@ class Ciudad:
 
     def add_estacion(self, estacion):
         self.estaciones[estacion.id] = estacion
+
+    def agregar_pasajeros_manualmente(self):
+        numero_total = 20 # int(input("Ingrese la cantidad de pasajeros inicial entre todas las estaciones\n"))
+        keys = []
+        estaciones_array = []
+        for i in self.estaciones:
+            keys.append(i)
+        for key in keys:
+            estaciones_array.append(self.estaciones[key])
+
+        for est in estaciones_array:
+            if numero_total > 1:
+                est.no_pasajeros = random.randint(1, numero_total)
+            else:
+                estaciones_array[-1].no_pasajeros = numero_total
+            numero_total = numero_total - est.no_pasajeros
 
     def add_ruta(self, estacion_inicio, estacion_destino, distancia):
         if estacion_inicio.id in self.estaciones and estacion_destino.id in self.estaciones:
