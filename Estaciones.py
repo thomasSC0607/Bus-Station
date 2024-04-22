@@ -27,8 +27,15 @@ class Ciudad:
     def add_estacion(self, estacion):
         self.estaciones[estacion.id] = estacion
 
+    def total_pasajeros(ciudad):
+        total = 0
+        for estacion in ciudad.estaciones.values():
+            total += estacion.no_pasajeros
+        return total
+
+    """
     def agregar_pasajeros_manualmente(self):
-        numero_total = 20 # int(input("Ingrese la cantidad de pasajeros inicial entre todas las estaciones\n"))
+        numero_total = 20  # int(input("Ingrese la cantidad de pasajeros inicial entre todas las estaciones\n"))
         keys = []
         estaciones_array = []
         for i in self.estaciones:
@@ -42,6 +49,28 @@ class Ciudad:
             else:
                 estaciones_array[-1].no_pasajeros = numero_total
             numero_total = numero_total - est.no_pasajeros
+    """
+
+    def distribuir_pasajeros(self, num_pasajeros):
+        import random
+        estaciones = []
+        for estacion in self.estaciones.values():
+            if estacion.id != 'G':
+                estaciones.append(estacion)
+        while num_pasajeros > 0:
+            estacion = random.choice(estaciones)
+            estacion.no_pasajeros += 1
+            num_pasajeros -= 1
+
+    def agregar_pasajeros_ran30(self, ciudad):
+        total_pasajeros_agregados = 0
+        for estacion in ciudad.estaciones.values():
+            if estacion.id != 'G':
+                if total_pasajeros_agregados >= 15:
+                    break
+                if random.random() <= 0.3:  # 30% de probabilidad de agregar pasajeros ya que el random genera de 0 a 1
+                    estacion.no_pasajeros += 1
+                    total_pasajeros_agregados += 1
 
     def add_ruta(self, estacion_inicio, estacion_destino, distancia):
         if estacion_inicio.id in self.estaciones and estacion_destino.id in self.estaciones:
