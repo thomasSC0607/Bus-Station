@@ -1,5 +1,7 @@
 from Estaciones import *
 
+#  Este archivo solo se utiliza para el primer punto del problema
+
 if __name__ == "__main__":
     ciudad = Ciudad()
 
